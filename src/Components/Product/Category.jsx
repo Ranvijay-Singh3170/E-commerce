@@ -21,9 +21,10 @@ const Category = () => {
           <li
             key={category}
             className="p-3 bg-gray-100 hover:bg-blue-100 cursor-pointer rounded shadow"
-            onClick={() => navigate(`/categories/${category}`)}
+            onClick={() => navigate(`/category/${category}`)}
+            
           >
-            {category.toUpperCase()}
+            {category.toLowerCase()}
           </li>
         ))}
       </ul>
