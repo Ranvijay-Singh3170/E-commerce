@@ -6,6 +6,7 @@ import ProductDetail from "./Components/Product/ProductDetail"
 import Category from "./Components/Product/Category"
 import CategoryProducts from "./Components/Product/CategoryProducts"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SearchPage from "./pages/search"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
         <Route path="/categories"  element={<Category />} />
         <Route path="/category/:name" element={<CategoryProducts />} />
+        <Route path="/search" element={<SearchPage />} />
 
       </Routes>
   )
