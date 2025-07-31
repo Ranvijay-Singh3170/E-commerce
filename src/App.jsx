@@ -7,6 +7,8 @@ import Category from "./Components/Product/Category"
 import CategoryProducts from "./Components/Product/CategoryProducts"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SearchPage from "./pages/search"
+import CartPage from "./pages/CartPages";  
+
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<ProductList />} />
         <Route path="/:id" element={<ProductDetail />} />
 
+
+  <Route path="/cart" element={<CartPage />} />
         <Route path="/categories"  element={<Category />} />
         <Route path="/category/:name" element={<CategoryProducts />} />
         <Route path="/search" element={<SearchPage />} />

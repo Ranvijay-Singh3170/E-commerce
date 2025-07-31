@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ProductCard from "../ProductCard";
 
 const CategoryProducts = () => {
   const { name } = useParams();
@@ -17,19 +18,7 @@ const CategoryProducts = () => {
       <h2 className="text-2xl font-bold mb-4 capitalize">{name} Products</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-md p-3 shadow hover:shadow-lg"
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="w-full h-40 object-cover mb-2 rounded"
-            />
-            <h3 className="font-semibold">{product.title}</h3>
-            <p className="text-sm text-gray-600">{product.brand}</p>
-            <p className="text-red-600 font-bold">₹{product.price}</p>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

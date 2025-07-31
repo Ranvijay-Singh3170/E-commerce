@@ -1,6 +1,6 @@
 // Components/product/Category.jsx
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // ✅ correct import
+import { useNavigate } from 'react-router-dom';  
 
 const Category = () => {
   const [categories, setCategories] = useState([]);

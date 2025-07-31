@@ -19,7 +19,7 @@ export const navLinksData = [
       { name: "Women-Bags", path: "/category/womens-bags" },
       { name: "Women-Dresses", path: "/category/womens-dresses" },
       { name: "Women-Shoes", path: "/category/womens-shoes" },
-      { name: "Women-Jwellery", path: "/category/womens-jwellery" },
+      { name: "Women-Jwellery", path: "/category/womens-jewellery" },
       { name: "Women-Watches", path: "/category/womens-watches" },
     ],
   },
