@@ -1,44 +1,72 @@
-
+import React, { useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 
-import React from "react";
-
 const ProductInfo = ({ product }) => {
-     const { addToCart } = useCart();
-  if (!product) return null; // If product is undefined
+  const { addToCart } = useCart();
 
-  const discountPercent = 20; // You can dynamically set this
-  const discountedPrice = (product.price * (1 - discountPercent / 100)).toFixed(2);
+  // Load Razorpay Script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const loadRazorpay = () => {
+    if (!window.Razorpay) {
+      alert("Razorpay SDK not loaded. Check internet connection.");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_dM0Y0bLPyvpWgR", // Replace with your live key in production
+      amount: product.price * 100,
+      currency: "INR",
+      name: "Radoms Digital",
+      description: `Payment for ${product.title}`,
+      image: "https://your-logo-url.com/logo.png",
+      handler: function (response) {
+        alert("Payment successful!");
+        console.log("Radoms Digital response", response);
+      },
+      prefill: {
+        name: "Ranvijay Singh",
+        email: "customer@example.com",
+        contact: "9792563170",
+      },
+      notes: {
+        address: "Radoms Digital Pvt Ltd Gaur City Greater Noida",
+      },
+      theme: {
+        color: "#6366F1", // Tailwind Indigo-500
+      },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  };
 
   return (
-    <div className="p-4 space-y-4">
-      {/* Category & Title */}
-      <div>
-        <p className="text-sm font-medium text-gray-500 capitalize">{product.category}</p>
-        <h1 className="text-3xl md:text-4xl font-bold text-black">{product.title}</h1>
-      </div>
+    <div className="p-6 bg-white shadow-md rounded-lg w-full max-w-2xl mx-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">{product.title}</h2>
+      <p className="text-xl text-gray-700 mb-4">₹{product.price}</p>
 
-      {/* Price */}
-      <div className="flex gap-3 items-center">
-        <h2 className="text-xl font-semibold text-gray-500 line-through">₹{product.price}</h2>
-        <h2 className="text-2xl md:text-3xl font-bold text-green-600">₹{discountedPrice}</h2>
-        <span className="text-sm text-red-600 font-medium">({discountPercent}% OFF)</span>
-      </div>
-
-      {/* Description */}
-      <p className="text-gray-700 line-clamp-3">{product.description}</p>
-
-      {/* Buttons */}
-      <div className="flex gap-5 pt-4">
-        <button className="border-2 border-black px-6 py-2 rounded-xl font-semibold hover:bg-black hover:text-white transition-all duration-200">
+      <div className="flex flex-col sm:flex-row gap-4">
+        <button
+          onClick={loadRazorpay}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-md transition duration-300 w-full sm:w-auto"
+        >
           Buy Now
         </button>
         <button
-    onClick={() => addToCart(product)}
-    className="border-2 border-yellow-500 bg-yellow-500 text-black px-6 py-2 rounded-xl font-semibold hover:bg-yellow-600 transition-all duration-200"
-  >
-    Add to Cart
-  </button>
+          onClick={() => addToCart(product)}
+          className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium px-6 py-3 rounded-md transition duration-300 w-full sm:w-auto"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
