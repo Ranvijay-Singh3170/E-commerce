@@ -50,14 +50,14 @@ const ProductInfo = ({ product }) => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg w-full max-w-2xl mx-auto">
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">{product.title}</h2>
-      <p className="text-xl text-gray-700 mb-4">₹{product.price}</p>
+    <div className="p-6 bg-white shadow-xl rounded-2xl w-full max-w-3xl mx-auto border border-gray-100">
+      <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2 leading-tight tracking-tight">{product.title}</h2>
+      <p className="text-2xl text-indigo-600 font-semibold mb-6">₹{product.price}</p>
 
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row items-center gap-4">
         <button
           onClick={loadRazorpay}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-md transition duration-300 w-full sm:w-auto"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out  w-full sm:w-auto"
         >
           Buy Now
         </button>
