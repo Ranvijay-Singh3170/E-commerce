@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const BuyPage = () => {
+
+  
   const location = useLocation();
   const product = location.state?.product;
 

@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useCart } from "../../context/CartContext";
-
+import {useNavigate } from "react-router-dom";
 const ProductInfo = ({ product }) => {
-  const { addToCart } = useCart();
+    const navigate = useNavigate();
+    const user = localStorage.getItem("loggedInUser");
+  
+    const handleLoadRazorpay = () => {
+      if(user) {
+        loadRazorpay()
+      } else {
+        navigate("/login")
+      }
+    }
 
+  const { handle2AddToCart } = useCart();
   // Load Razorpay Script
   useEffect(() => {
     const script = document.createElement("script");
@@ -14,6 +24,8 @@ const ProductInfo = ({ product }) => {
       document.body.removeChild(script);
     };
   }, []);
+
+  
 
   const loadRazorpay = () => {
     if (!window.Razorpay) {
@@ -56,13 +68,13 @@ const ProductInfo = ({ product }) => {
 
       <div className="flex flex-col sm:flex-row items-center gap-4">
         <button
-          onClick={loadRazorpay}
+          onClick={handleLoadRazorpay}
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out  w-full sm:w-auto"
         >
           Buy Now
         </button>
         <button
-          onClick={() => addToCart(product)}
+          onClick={() => handle2AddToCart(product)}
           className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium px-6 py-3 rounded-md transition duration-300 w-full sm:w-auto"
         >
           Add to Cart
